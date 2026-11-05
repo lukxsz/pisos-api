@@ -1,4 +1,7 @@
 package br.com.lukas.pisos_api.orcamento;
 
-public class OrcamentoRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface OrcamentoRepository extends JpaRepository<Orcamento,Long> {
+
 }

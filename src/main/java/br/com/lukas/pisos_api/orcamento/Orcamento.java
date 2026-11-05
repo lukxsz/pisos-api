@@ -20,15 +20,17 @@ public class Orcamento {
         APLICACAO,
         COLOCACAO;
     }
+
     @Enumerated(EnumType.STRING)
     private Servico tipoServico;
 
-    private enum StatusOrcamento{
+    public enum StatusOrcamento{
          PENDENTE,
          APROVADO,
          EM_ANDAMENTO,
          FINALIZADO
     }
+
     @Enumerated(EnumType.STRING)
     private StatusOrcamento statusOrcamento;
 
@@ -70,6 +72,22 @@ public class Orcamento {
 
     public void setValor(BigDecimal valor) {
         this.valor = valor;
+    }
+
+    public Servico getTipoServico() {
+        return tipoServico;
+    }
+
+    public void setTipoServico(Servico tipoServico) {
+        this.tipoServico = tipoServico;
+    }
+
+    public StatusOrcamento getStatusOrcamento() {
+        return statusOrcamento;
+    }
+
+    public void setStatusOrcamento(StatusOrcamento statusOrcamento) {
+        this.statusOrcamento = statusOrcamento;
     }
 
     public Long getId() {
