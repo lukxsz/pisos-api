@@ -18,7 +18,7 @@ public class Orcamento {
     public enum Servico {
         RASPAGEM,
         APLICACAO,
-        COLOCACAO;
+        COLOCACAO
     }
 
     @Enumerated(EnumType.STRING)
