@@ -34,6 +34,23 @@ public class Orcamento {
     @Enumerated(EnumType.STRING)
     private StatusOrcamento statusOrcamento;
 
+    public enum Produto {
+        BONA,
+        SINTEKO,
+        CASCOLAC,
+        NENHUM                                  //TODO: perguntar as opcoes de resina
+    }
+    @Enumerated(EnumType.STRING)
+    private Produto tipoProduto;
+
+    public Produto getTipoProduto() {
+        return tipoProduto;
+    }
+
+    public void setTipoProduto(Produto tipoProduto) {
+        this.tipoProduto = tipoProduto;
+    }
+
     public String getNomeCliente() {
         return nomeCliente;
     }

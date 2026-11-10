@@ -9,5 +9,6 @@ public record OrcamentoRequestDTO(
         @NotBlank String numeroCelular,
         @NotBlank String endereco,
         @NotNull Orcamento.Servico tipoServico,
-        @NotNull @Positive Float metragem
+        @NotNull @Positive Float metragem,
+        @NotNull Orcamento.Produto tipoProduto
 ) {}

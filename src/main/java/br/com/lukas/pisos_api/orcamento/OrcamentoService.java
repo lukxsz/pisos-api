@@ -20,11 +20,13 @@ public class OrcamentoService{
         orcamento.setEndereco(dados.endereco());
         orcamento.setTipoServico(dados.tipoServico());
         orcamento.setMetragem(dados.metragem());
-
+        orcamento.setTipoProduto(dados.tipoProduto());
         orcamento.setStatusOrcamento(Orcamento.StatusOrcamento.PENDENTE);
 
-        double valor = tabelaPreco(orcamento.getTipoServico());
-        BigDecimal valorFinal = BigDecimal.valueOf((valor*orcamento.getMetragem()));
+        double valorServico = tabelaPrecoServico(orcamento.getTipoServico());
+        double valorProduto = tabelaPrecoProduto(orcamento.getTipoProduto());
+
+        BigDecimal valorFinal = BigDecimal.valueOf((valorServico+valorProduto)*orcamento.getMetragem());
         orcamento.setValor(valorFinal);
 
         return orcamentoRepository.save(orcamento);
@@ -34,7 +36,7 @@ public class OrcamentoService{
         return orcamentoRepository.findAll();
     }
 
-    public double tabelaPreco(Orcamento.Servico servico){
+    public double tabelaPrecoServico(Orcamento.Servico servico){
         double precoServico = 0;
         switch (servico){
             case RASPAGEM :
@@ -48,5 +50,23 @@ public class OrcamentoService{
                 break;
         }
         return precoServico;
+    }
+    public double tabelaPrecoProduto(Orcamento.Produto produto){
+        double precoProduto = 0;
+        switch (produto){
+            case BONA:
+                precoProduto = 20.00;
+                break;
+            case SINTEKO:
+                precoProduto = 10.00;
+                break;
+            case CASCOLAC:
+                precoProduto = 11.00;
+                break;
+            case NENHUM:
+                precoProduto = 0;
+                break;
+        }
+        return precoProduto;
     }
 }
