@@ -13,7 +13,14 @@ public class OrcamentoService{
         this.orcamentoRepository = orcamentoRepository;
     }
 
-    public Orcamento criarOrcamento(Orcamento orcamento){
+    public Orcamento criarOrcamento(OrcamentoRequestDTO dados){
+        Orcamento orcamento = new Orcamento();
+        orcamento.setNomeCliente(dados.nomeCliente());
+        orcamento.setNumeroCelular(dados.numeroCelular());
+        orcamento.setEndereco(dados.endereco());
+        orcamento.setTipoServico(dados.tipoServico());
+        orcamento.setMetragem(dados.metragem());
+
         orcamento.setStatusOrcamento(Orcamento.StatusOrcamento.PENDENTE);
 
         double valor = tabelaPreco(orcamento.getTipoServico());
