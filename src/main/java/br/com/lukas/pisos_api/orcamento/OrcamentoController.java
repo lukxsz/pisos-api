@@ -1,7 +1,6 @@
 package br.com.lukas.pisos_api.orcamento;
 
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Positive;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +20,7 @@ public class OrcamentoController {
     }
 
     @PostMapping
-    public Orcamento criar(@RequestBody @Valid OrcamentoRequestDTO dados){
+    public OrcamentoResponseDTO criar(@RequestBody @Valid OrcamentoRequestDTO dados){
         return orcamentoService.criarOrcamento(dados);
     }
 
@@ -31,5 +30,19 @@ public class OrcamentoController {
             @RequestParam Orcamento.StatusOrcamento novoStatus
     ){
         return orcamentoService.atualizarStatus(id, novoStatus);
+    }
+
+    @GetMapping("/{id}")
+    public Orcamento busca(
+            @PathVariable Long id
+    ){
+        return orcamentoService.buscarOrcamento(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleta(
+            @PathVariable Long id
+    ){
+        orcamentoService.deletarOrcamento(id);
     }
 }
