@@ -24,4 +24,12 @@ public class OrcamentoController {
     public Orcamento criar(@RequestBody @Valid OrcamentoRequestDTO dados){
         return orcamentoService.criarOrcamento(dados);
     }
+
+    @PatchMapping("/{id}/status")
+    public Orcamento atualizarStatus(
+            @PathVariable Long id,
+            @RequestParam Orcamento.StatusOrcamento novoStatus
+    ){
+        return orcamentoService.atualizarStatus(id, novoStatus);
+    }
 }

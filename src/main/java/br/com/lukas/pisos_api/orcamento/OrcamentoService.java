@@ -36,6 +36,12 @@ public class OrcamentoService{
         return orcamentoRepository.findAll();
     }
 
+    public Orcamento atualizarStatus(Long id, Orcamento.StatusOrcamento novoStatus){
+        Orcamento orcamento = orcamentoRepository.findById(id).orElseThrow();
+        orcamento.setStatusOrcamento(novoStatus);
+        return orcamentoRepository.save(orcamento);
+    }
+
     public double tabelaPrecoServico(Orcamento.Servico servico){
         double precoServico = 0;
         switch (servico){
