@@ -3,7 +3,6 @@ package br.com.lukas.pisos_api.orcamento;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 
-
 @Entity
 public class Orcamento {
     @Id
@@ -20,7 +19,6 @@ public class Orcamento {
         APLICACAO,
         COLOCACAO
     }
-
     @Enumerated(EnumType.STRING)
     private Servico tipoServico;
 
@@ -30,7 +28,6 @@ public class Orcamento {
          EM_ANDAMENTO,
          FINALIZADO
     }
-
     @Enumerated(EnumType.STRING)
     private StatusOrcamento statusOrcamento;
 
@@ -110,6 +107,7 @@ public class Orcamento {
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }

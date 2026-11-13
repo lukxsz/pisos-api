@@ -1,5 +1,7 @@
 package br.com.lukas.pisos_api.orcamento;
 
+import br.com.lukas.pisos_api.preco.Preco;
+import br.com.lukas.pisos_api.preco.PrecoRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +16,11 @@ public class OrcamentoService{
     private String numeroDestino;
 
     private final OrcamentoRepository orcamentoRepository;
+    private final PrecoRepository precoRepository;
 
-    public OrcamentoService(OrcamentoRepository orcamentoRepository) {
+    public OrcamentoService(OrcamentoRepository orcamentoRepository, PrecoRepository precoRepository) {
         this.orcamentoRepository = orcamentoRepository;
+        this.precoRepository = precoRepository;
     }
 
     public OrcamentoResponseDTO criarOrcamento(OrcamentoRequestDTO dados){
@@ -81,32 +85,41 @@ public class OrcamentoService{
         return  "https://wa.me/" + numeroDestino + "?text=" + mensagemURL;
     }
 
+    public Preco obterTabelaPreco(){
+        return precoRepository.findById(1L).orElseGet(() -> precoRepository.save(new Preco()));
+    }
+    public Preco atualizarTabelaPreco(Preco novosPrecos){
+        novosPrecos.setId(1L);
+        return precoRepository.save(novosPrecos);
+    }
     public double tabelaPrecoServico(Orcamento.Servico servico){
         double precoServico = 0;
+        Preco preco = obterTabelaPreco();
         switch (servico){
             case RASPAGEM :
-                precoServico = 20.00;
+                precoServico = preco.getPrecoRaspagem().doubleValue();
                 break;//TODO: pegar valor reais dos servicos
             case APLICACAO:
-                precoServico = 10.00;
+                precoServico = preco.getPrecoAplicacao().doubleValue();
                 break;
             case COLOCACAO:
-                precoServico = 11.00;
+                precoServico = preco.getPrecoColocacao().doubleValue();
                 break;
         }
         return precoServico;
     }
-    public double tabelaPrecoProduto(Orcamento.Produto produto){
+    public double tabelaPrecoProduto(Orcamento.Produto produto) {
         double precoProduto = 0;
+        Preco preco = obterTabelaPreco();
         switch (produto){
             case BONA:
-                precoProduto = 20.00;
+                precoProduto = preco.getPrecoBona().doubleValue();
                 break;
             case SINTEKO:
-                precoProduto = 10.00;
+                precoProduto = preco.getPrecoSinteko().doubleValue();
                 break;
             case CASCOLAC:
-                precoProduto = 11.00;
+                precoProduto =preco.getPrecoCascolac().doubleValue();
                 break;
             case NENHUM:
                 precoProduto = 0;
