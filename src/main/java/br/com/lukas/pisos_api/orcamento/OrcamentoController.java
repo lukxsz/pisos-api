@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/orcamentos")
 public class OrcamentoController {
     private final OrcamentoService orcamentoService;

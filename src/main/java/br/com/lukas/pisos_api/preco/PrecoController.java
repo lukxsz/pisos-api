@@ -5,6 +5,7 @@ import br.com.lukas.pisos_api.orcamento.OrcamentoService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/precos")
 public class PrecoController {
     private final OrcamentoService orcamentoService;
